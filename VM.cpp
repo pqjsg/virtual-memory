@@ -2,9 +2,9 @@
 #include <iostream>
 using namespace std;
 
-//real_element_index - индекс элемента в исходном массиве
-//target_page_number - номер искомой страницы
-//real_page_number реальный номер страницы
+//real_element_index - РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° РІ РёСЃС…РѕРґРЅРѕРј РјР°СЃСЃРёРІРµ
+//target_page_number - РЅРѕРјРµСЂ РёСЃРєРѕРјРѕР№ СЃС‚СЂР°РЅРёС†С‹
+//real_page_number СЂРµР°Р»СЊРЅС‹Р№ РЅРѕРјРµСЂ СЃС‚СЂР°РЅРёС†С‹
 
 int* VM::find_add(int real_element_index)
 {
@@ -19,7 +19,7 @@ int* VM::find_add(int real_element_index)
 
 		if (!is_in_buffer(target_page_number)) 
 		{
-			// находим самую старую страницу
+			// РЅР°С…РѕРґРёРј СЃР°РјСѓСЋ СЃС‚Р°СЂСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
 			Page oldest_page = buffer[0];
 			int oldest_buffer_page_index = 0;
 			for (int i = 1; i < 4; i++)
@@ -34,7 +34,7 @@ int* VM::find_add(int real_element_index)
 			Page current_page;
 			if (oldest_page.status)
 			{
-				// находим страницу в файле
+				// РЅР°С…РѕРґРёРј СЃС‚СЂР°РЅРёС†Сѓ РІ С„Р°Р№Р»Рµ
 				file.open(name + ".bm", fstream::in | fstream::out | fstream::binary);
 				do
 				{
@@ -43,7 +43,7 @@ int* VM::find_add(int real_element_index)
 					file.read((char*)&current_page, sizeof(Page));
 				} while (current_page.real_page_number != oldest_page_number);
 
-				//перезаписываем битмап и страницу
+				//РїРµСЂРµР·Р°РїРёСЃС‹РІР°РµРј Р±РёС‚РјР°Рї Рё СЃС‚СЂР°РЅРёС†Сѓ
 				long pos = file.tellg();
 				file.seekp(pos - sizeof(Page) - element_count * sizeof(bool));
 				for (int i = 0; i < element_count; i++)
@@ -51,7 +51,7 @@ int* VM::find_add(int real_element_index)
 				file.write((char*)&buffer[oldest_buffer_page_index], sizeof(Page));
 				file.close();
 			}
-			//загружаем в буффер страницу target_page_number вместо oldest_buffer_page_index
+			//Р·Р°РіСЂСѓР¶Р°РµРј РІ Р±СѓС„С„РµСЂ СЃС‚СЂР°РЅРёС†Сѓ target_page_number РІРјРµСЃС‚Рѕ oldest_buffer_page_index
 			file.open(name + ".bm", fstream::in | fstream::binary);
 			do
 			{
