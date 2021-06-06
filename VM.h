@@ -21,7 +21,7 @@ private:
 	fstream file;
 	Page buffer[4];
 	bool** bitmap_collection;
-	void initialization(); //генерация буфера, битмапы и запись файла
+	void initialization(); //РіРµРЅРµСЂР°С†РёСЏ Р±СѓС„РµСЂР°, Р±РёС‚РјР°РїС‹ Рё Р·Р°РїРёСЃСЊ С„Р°Р№Р»Р°
 
 	int* find_add(int real_element_index);
 	bool is_in_buffer(int relative_element_index);
